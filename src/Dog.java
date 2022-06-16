@@ -1,8 +1,10 @@
-public class Dog {
-    private String name;
-    private int age;
+import java.util.Objects;
 
-    public Dog(String name, int age) {
+public class Dog implements Comparable<Dog> {
+    private String name;
+    private Integer age;
+
+    public Dog(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
@@ -23,11 +25,33 @@ public class Dog {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dog dog = (Dog) o;
+        return Objects.equals(name, dog.name) && Objects.equals(age, dog.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+
+    @Override
+    public int compareTo(Dog o) {
+        int result = this.name.compareTo(o.name);
+        if (result == 0) {
+            result = this.age.compareTo(o.age);
+        }
+        return result;
     }
 }

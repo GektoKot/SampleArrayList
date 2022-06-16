@@ -10,6 +10,10 @@ public class SampleArrayList<T> implements SampleList<T> {
         array = new Object[INIT_CAPACITY];
     }
 
+    public void sort() {
+        QuickSorter.quickSort(array, pointer);
+    }
+
     @Override
     public void add(T item) {
         if (pointer == array.length - 1) {
